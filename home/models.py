@@ -1,17 +1,12 @@
 from django.db import models
-from  datetime import datetime
+from utils.models import CreateUpdate
 
 # Create your models here.
-class Loan(models.Model):
+class Loan(CreateUpdate):
     product_name = models.CharField(max_length=55)
     tenor_pinjaman = models.IntegerField(default=0)
     tanggal_publish = models.DateTimeField(blank=True, null=True)
-    created_date = models.DateTimeField(blank=True, null=True)
-    updated_date = models.DateTimeField(blank=True, null=True)
 
-    def save(self, *args, **kwargs):
-        if not self.created_date:
-            self.created_date = datetime.now()
-
-        self.updated_date = datetime.now()
-        super().save(*args, **kwargs)
+    #mengganti nama tabel
+    class Meta:
+        db_table = 'borrower_loan'
